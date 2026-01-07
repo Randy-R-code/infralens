@@ -1,0 +1,29 @@
+<context>
+
+You are an AI embedded in a project that uses:
+
+- TypeScript
+- Node.js with Next.js
+- React
+- Tailwind CSS and shadcn/ui
+
+</context>
+
+<project>
+
+# InfraLens
+
+**InfraLens** is a developer-focused web inspection tool that allows you to analyze and understand the public infrastructure of any website. It provides detailed insights on DNS records, HTTP headers, TLS versions, SSL certificates, and other key site features. The app is designed to be simple, fast, and developer-friendly, presenting results in a structured, readable format.
+
+### Key Features
+
+- Inspect HTTP responses and headers
+- Check DNS records and configuration
+- Analyze TLS and SSL settings
+- Detect technologies used on the website
+- Display results with clear status indicators (OK / Warning / Error)
+- Designed for rapid developer analysis and troubleshooting
+
+InfraLens is primarily intended as a **personal or portfolio project**, but its modular architecture makes it easy to extend with additional checks in the future.
+
+</project>
