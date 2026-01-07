@@ -5,11 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2026-01-07
+
+### Added
+
+#### SEO & Social Sharing
+
+- Open Graph meta tags for social media sharing
+- Twitter Card meta tags with large image support
+- Dedicated metadata configuration file (`src/lib/metadata.ts`)
+- OG image integration (`/logo-infralens-og.png`)
+
+### Changed
+
+- Metadata configuration extracted to separate module for better maintainability
+
+---
+
 ## [0.1.0] - 2026-01-06
 
 ### Added
 
 #### Project Setup
+
 - Initial Next.js 16.1.1 project setup with TypeScript
 - Tailwind CSS v4 configuration with custom breakpoints (xs: 26.25rem)
 - shadcn/ui component library integration
@@ -18,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TypeScript configuration with path aliases (`@/*`, `@lib/*`, `@components/*`)
 
 #### Design System
+
 - Custom dark theme with zinc color palette (zinc-900 background, zinc-100 foreground)
 - Primary color scheme: blue-500 with hover states
 - Status color indicators:
@@ -29,11 +48,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Responsive design with mobile-first approach
 
 #### UI Components
+
 - shadcn/ui components: Alert, Badge, Button, Card, Input, Separator, Skeleton, Table, Tooltip
 - Custom Skeleton component with zinc-800 background
 - All components styled with dark theme
 
 #### Landing Page
+
 - Hero section with gradient title "infralens.dev"
 - Search form with URL input and Analyze button
 - Responsive form layout (stacked on mobile, inline on xs+)
@@ -49,6 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Footer with documentation link and portfolio attribution
 
 #### Documentation
+
 - `/docs` page with comprehensive documentation
 - Sections covering:
   - DNS Records (A/AAAA, MX, TXT, common misconfigurations)
@@ -57,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Back to home navigation
 
 #### Check System Architecture
+
 - Modular check system with extensible architecture
 - Type-safe check definitions with `CheckResult<T>` and `CheckRunner<T>`
 - Check context with URL, hostname, and timeout configuration
@@ -64,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Centralized check orchestration in `run-checks.ts`
 
 #### HTTP Security Headers Check
+
 - First implemented check: HTTP Security Headers
 - Checks for 5 recommended security headers:
   - Content-Security-Policy
@@ -79,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance tracking with duration in milliseconds
 
 #### Results Display
+
 - Results section component with loading states
 - Skeleton loading animation during check execution
 - Check result cards with:
@@ -91,11 +116,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Smooth scroll animations
 
 #### Server Actions
+
 - Server action `runInfraChecks` for executing checks
 - URL normalization and validation
 - Error handling with user-friendly messages
 
 #### Responsive Design
+
 - Mobile-first responsive breakpoints
 - Custom xs breakpoint (26.25rem / 420px)
 - Responsive spacing and padding adjustments
@@ -112,6 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Technical Details
 
 #### Dependencies
+
 - Next.js 16.1.1
 - React 19.2.3
 - TypeScript 5
@@ -122,6 +150,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - clsx & tailwind-merge
 
 #### File Structure
+
 - 40+ files created/modified
 - Organized component structure (landing/, results/, ui/)
 - Modular check system (checks/ directory)
