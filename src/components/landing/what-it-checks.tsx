@@ -5,33 +5,44 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Code, FileText, Globe, Search, Shield } from "lucide-react";
+import { Code, FileText, Globe, Network, Shield, Zap } from "lucide-react";
 
-const checks = [
-  {
-    icon: Globe,
-    title: "DNS Records",
-    description: "A, AAAA, MX, TXT",
-  },
+const categories = [
   {
     icon: Shield,
-    title: "TLS & SSL",
-    description: "Protocol, certificate, expiration",
+    title: "HTTP & Security",
+    description: "Security headers, HTTPS, redirects",
+    count: 3,
   },
   {
-    icon: Search,
-    title: "HTTP Headers",
-    description: "Security & cache headers",
+    icon: Globe,
+    title: "Network & DNS",
+    description: "DNS records, security, IP & hosting",
+    count: 3,
   },
   {
-    icon: Code,
-    title: "Tech Stack",
-    description: "Frameworks, servers, CMS",
+    icon: Network,
+    title: "Infrastructure",
+    description: "WAF & CDN detection",
+    count: 1,
   },
   {
     icon: FileText,
-    title: "Metadata",
-    description: "robots.txt, sitemap, social tags",
+    title: "Website Structure",
+    description: "robots.txt, sitemap, links",
+    count: 3,
+  },
+  {
+    icon: Code,
+    title: "Metadata & Stack",
+    description: "HTML metadata, social tags, tech stack",
+    count: 4,
+  },
+  {
+    icon: Zap,
+    title: "Performance",
+    description: "Response metrics, uptime",
+    count: 2,
   },
 ];
 
@@ -46,11 +57,11 @@ export function WhatItChecks() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-4 md:gap-6">
-          {checks.map((check) => {
-            const Icon = check.icon;
+          {categories.map((category) => {
+            const Icon = category.icon;
             return (
               <Card
-                key={check.title}
+                key={category.title}
                 className="border-zinc-800 bg-zinc-900/50"
               >
                 <CardHeader>
@@ -58,12 +69,19 @@ export function WhatItChecks() {
                     <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
                       <Icon className="size-5 text-blue-400" />
                     </div>
-                    <CardTitle className="text-lg">{check.title}</CardTitle>
+                    <div className="flex-1">
+                      <CardTitle className="text-lg">
+                        {category.title}
+                      </CardTitle>
+                      <CardDescription className="text-zinc-500 text-xs mt-0.5">
+                        {category.count} check{category.count > 1 ? "s" : ""}
+                      </CardDescription>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-zinc-400">
-                    {check.description}
+                    {category.description}
                   </CardDescription>
                 </CardContent>
               </Card>

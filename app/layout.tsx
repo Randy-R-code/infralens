@@ -1,4 +1,5 @@
 import { siteMetadata } from "@/lib/metadata";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -32,7 +33,22 @@ const geistMono = localFont({
   fallback: ["ui-monospace", "monospace"],
 });
 
-export const metadata = siteMetadata;
+export const metadata: Metadata = {
+  ...siteMetadata,
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "InfraLens",
+  },
+  icons: {
+    apple: "/icon-192.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#3b82f6",
+};
 
 export default function RootLayout({
   children,

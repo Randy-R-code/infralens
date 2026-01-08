@@ -11,12 +11,17 @@ import { runInfraChecks } from "../../../app/actions/run-checks";
 export function Hero({
   onResults,
   onAnalysisStart,
+  isLoading: externalIsLoading,
 }: {
   onResults?: (results: ChecksResponse) => void;
   onAnalysisStart?: () => void;
+  isLoading?: boolean;
 }) {
   const [url, setUrl] = useState("");
   const [isPending, startTransition] = useTransition();
+
+  // Use external loading state if provided, otherwise use internal
+  const isLoading = externalIsLoading ?? isPending;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,23 +47,57 @@ export function Hero({
         }, 100);
       } catch (error) {
         console.error("Error running checks:", error);
-        // Create a minimal error response
+
+        // Improved error handling
+        let errorMessage =
+          "Failed to analyze the URL. Please check the URL and try again.";
+        let hostname = "unknown";
+
+        if (error instanceof Error) {
+          // Rate limit error
+          if (error.message.includes("Rate limit exceeded")) {
+            errorMessage = error.message;
+          }
+          // URL validation error
+          else if (
+            error.message.includes("Invalid URL") ||
+            error.name === "TypeError"
+          ) {
+            errorMessage =
+              "Invalid URL format. Please enter a valid URL (e.g., https://example.com)";
+          }
+          // Network/timeout error
+          else if (
+            error.message.includes("timeout") ||
+            error.message.includes("fetch")
+          ) {
+            errorMessage =
+              "Request timed out or network error. Please check your connection and try again.";
+          }
+          // Generic error with message
+          else if (error.message) {
+            errorMessage = error.message;
+          }
+        }
+
+        // Try to extract hostname
         try {
           urlObj = new URL(normalizedUrl);
+          hostname = urlObj.hostname;
         } catch {
-          urlObj = new URL("https://example.com");
+          // Keep "unknown" if URL is invalid
         }
+
         onResults?.({
           url: normalizedUrl,
-          hostname: urlObj.hostname,
+          hostname,
           checks: [
             {
               id: "error",
-              label: "Error",
+              label: "Analysis Error",
               category: "http-security",
               status: "error",
-              summary:
-                "Failed to analyze the URL. Please check the URL and try again.",
+              summary: errorMessage,
               durationMs: 0,
             },
           ],
@@ -113,10 +152,10 @@ export function Hero({
               <Button
                 type="submit"
                 size="lg"
-                disabled={isPending}
+                disabled={isLoading}
                 className="h-12 xs:px-8 w-full xs:w-auto bg-blue-500 hover:bg-blue-500/90 text-white disabled:opacity-50"
               >
-                {isPending ? "Analyzing..." : "Analyze"}
+                {isLoading ? "Analyzing..." : "Analyze"}
               </Button>
             </form>
           </CardContent>

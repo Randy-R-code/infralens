@@ -50,18 +50,20 @@ export function ResultsSection({
                 size="sm"
                 onClick={handleExport}
                 className="border-zinc-800 text-zinc-400 hover:text-zinc-300"
+                title="Export JSON"
               >
-                <Download className="size-4 mr-2" />
-                Export JSON
+                <Download className="size-4 sm:mr-2" />
+                <span className="hidden sm:inline">Export JSON</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={onNewAnalysis}
                 className="border-zinc-800 text-zinc-400 hover:text-zinc-300"
+                title="New Analysis"
               >
-                <RefreshCw className="size-4 mr-2" />
-                New Analysis
+                <RefreshCw className="size-4 sm:mr-2" />
+                <span className="hidden sm:inline">New Analysis</span>
               </Button>
             </div>
           )}

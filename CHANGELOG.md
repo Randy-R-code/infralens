@@ -13,6 +13,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - 2026-01-08
+
+### Added
+
+#### PWA Support
+
+- Progressive Web App (PWA) configuration with `manifest.json`
+- App icons (192x192 and 512x512) for installable experience
+- Apple touch icon and meta tags for iOS support
+- Theme color configuration via Next.js viewport API
+
+### Changed
+
+#### Landing Page
+
+- Updated "What it checks" section to reflect 6 categories with 16 checks total
+- Display category counts (e.g., "3 checks") for better clarity
+- Improved visual hierarchy with category icons and descriptions
+
+#### Results Section
+
+- Unified padding across all result cards to match landing page spacing
+- Responsive padding: `px-6 sm:px-8 md:px-12` for consistent horizontal spacing
+- Export JSON and New Analysis buttons show icons only below `sm` breakpoint
+- Improved button accessibility with proper titles and responsive text display
+
+#### CTA Section
+
+- Fixed CTA form to trigger analysis directly without intermediate scroll
+- Unified loading state between Hero and CTA components
+- Consistent "Analyzing..." state across all analysis triggers
+
+#### Error Handling
+
+- Enhanced error messages with specific handling for:
+  - Rate limit errors (with wait time display)
+  - Invalid URL format errors
+  - Network/timeout errors
+  - Generic error messages with fallback handling
+- Changed error label from "Error" to "Analysis Error" for clarity
+- Improved error message extraction and display
+
+#### UI/UX Improvements
+
+- Unified loading state management between Hero and CTA
+- Consistent hover states: `hover:bg-blue-500/90` for buttons, `hover:text-blue-400` for text links
+- Improved footer link styling for R-code attribution
+- Better visual feedback during analysis with disabled states
+
+#### Technical Improvements
+
+- Fixed Next.js 16 viewport API warning by moving `themeColor` to `viewport` export
+- Improved async error handling in CTA component
+- Better state synchronization between parent and child components
+
+---
+
 ## [1.0.0] - 2026-01-08
 
 ### Added

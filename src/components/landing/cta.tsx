@@ -6,7 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
-export function CTA({ onAnalyze }: { onAnalyze?: (url: string) => void }) {
+export function CTA({
+  onAnalyze,
+  isLoading,
+}: {
+  onAnalyze?: (url: string) => void | Promise<void>;
+  isLoading?: boolean;
+}) {
   const [url, setUrl] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -14,9 +20,10 @@ export function CTA({ onAnalyze }: { onAnalyze?: (url: string) => void }) {
     if (!url.trim()) return;
 
     if (onAnalyze) {
-      onAnalyze(url);
+      // Directly trigger analysis - results will scroll naturally
+      void onAnalyze(url);
     } else {
-      // Fallback: scroll to hero
+      // Fallback: scroll to hero and trigger form
       const heroSection = document.getElementById("hero");
       if (heroSection) {
         const heroInput = heroSection.querySelector(
@@ -69,9 +76,10 @@ export function CTA({ onAnalyze }: { onAnalyze?: (url: string) => void }) {
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-12 xs:px-8 w-full xs:w-auto bg-blue-500 hover:bg-blue-500/90 text-white"
+                  disabled={isLoading}
+                  className="h-12 xs:px-8 w-full xs:w-auto bg-blue-500 hover:bg-blue-500/90 text-white disabled:opacity-50"
                 >
-                  Analyze
+                  {isLoading ? "Analyzing..." : "Analyze"}
                 </Button>
               </form>
             </div>

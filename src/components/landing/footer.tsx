@@ -38,7 +38,7 @@ export function Footer() {
               href="https://randy-code.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 transition-colors"
+              className="text-blue-500 hover:text-blue-400 transition-colors"
             >
               R-code
             </Link>
