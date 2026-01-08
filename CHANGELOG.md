@@ -5,7 +5,165 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2026-01-07
+## [Unreleased]
+
+### Added
+
+- TBD
+
+---
+
+## [1.0.0] - 2026-01-08
+
+### Added
+
+#### Complete Check Implementation (16 Checks)
+
+- **HTTP & Security** (3 checks):
+  - HTTP Security Headers (CSP, HSTS, X-Frame-Options, etc.)
+  - HTTPS & TLS (enforcement, redirects, certificate validation)
+  - Redirect Behavior (chain analysis, loop detection)
+- **Network & DNS** (3 checks):
+  - DNS Records (A, AAAA, CNAME, MX, TXT, NS resolution)
+  - DNS Security (SPF, DKIM, DMARC, DNSSEC detection)
+  - IP & Hosting (IP address, ASN, provider via ipapi.co)
+- **Infrastructure** (1 check):
+  - Firewall / WAF Detection (Cloudflare, Fastly, Akamai, etc.)
+- **Website Structure** (3 checks):
+  - robots.txt (presence and validity)
+  - Sitemap (availability and format)
+  - Linked Pages (internal/external link analysis with broken link detection)
+- **Metadata & Stack** (4 checks):
+  - HTML Metadata (title, description, charset, viewport)
+  - Social Tags (Open Graph, Twitter Cards)
+  - Stack Detection (frameworks, CMS, analytics, CDN)
+  - Server Headers (information leakage detection)
+- **Performance** (2 checks):
+  - Performance Signals (response time, size, compression)
+  - Uptime Snapshot (reachability and status)
+
+#### Scoring System
+
+- Weighted category-based scoring system
+- Category weights configuration (HTTP & Security: 25, Network & DNS: 20, etc.)
+- Status multipliers (OK: 100%, Warning: 60%, Error: 0%)
+- Global score calculation with letter grades (A–E)
+- Category breakdown display with progress bars
+- "Why this score?" dialog explaining the scoring methodology
+
+#### Recommendation System
+
+- Structured recommendation types with severity levels
+- Recommendation factories for security and performance
+- Contextual recommendations with step-by-step guidance
+- Impact descriptions and external references
+- Recommendation cards in results UI
+
+#### DNS Infrastructure
+
+- Native Node.js DNS resolution with `dns/promises`
+- In-memory DNS cache with TTL (reduces redundant lookups)
+- DNS client with timeout handling and error management
+- Support for A, AAAA, CNAME, MX, TXT, NS record types
+- Safe error handling for DNS failures
+
+#### Export Functionality
+
+- JSON export of complete analysis results
+- Export includes: URL, timestamp, score, grade, categories, all checks
+- Download functionality with proper file naming
+
+#### Rate Limiting
+
+- In-memory rate limiting (1 request per IP per 30 seconds)
+- IP detection from various headers (x-forwarded-for, x-real-ip, cf-connecting-ip)
+- Automatic cleanup of expired rate limit entries
+- Clear error messages with wait time when limit exceeded
+
+#### UI Components
+
+- ScoreBadge component with grade display (A–E)
+- CategoryBreakdown component with progress bars
+- WhyScoreDialog component explaining scoring methodology
+- RecommendationCard component for displaying recommendations
+- Export button in results section
+
+#### Documentation
+
+- Comprehensive documentation page (`/docs`) with detailed explanations
+- Documentation for all 16 checks across 6 categories
+- Scoring system explanation
+- Notes and limitations section
+- Professional, portfolio-ready documentation
+
+#### Configuration
+
+- `.env.example` file for API key configuration
+- Optional `IPAPI_KEY` for enhanced IP/ASN lookups
+- `.gitignore` updated to allow `.env.example` while ignoring other `.env*` files
+
+### Changed
+
+#### README
+
+- Complete professional rewrite for portfolio presentation
+- Detailed architecture section with technology stack
+- Comprehensive project structure documentation
+- Enhanced features list (16 checks, export, rate limiting)
+- Detailed scoring system explanation
+- Technical details section (execution, error handling, performance)
+- Clear limitations and notes section
+- Open source mention in license section
+
+#### Documentation Page
+
+- Enhanced descriptions with implementation details
+- More technical and precise language
+- Detailed explanations for each check category
+- Improved limitations section with 5 clear points
+- Consistency with README content
+
+#### Server Actions
+
+- Fixed TypeScript error with `headers()` async in Next.js 16
+- Rate limiting integration in `runInfraChecks` action
+- Improved error handling with user-friendly messages
+
+#### Footer
+
+- Added GitHub repository link
+- Open source badge and MIT License display
+- Professional attribution
+
+#### Project Configuration
+
+- Updated `.cursorrules` with current project state (16 checks, scoring, architecture)
+- Improved project context for AI assistance
+
+### Technical Details
+
+#### New Dependencies
+
+- `cheerio` for HTML parsing and link extraction
+
+#### Architecture Improvements
+
+- Parallel check execution for optimal performance
+- Modular check system with type-safe interfaces
+- Centralized scoring calculation
+- Recommendation factory pattern
+- DNS caching layer for performance optimization
+
+#### Production Readiness
+
+- Fixed `metadataBase` warning for Open Graph images
+- Added `NEXT_PUBLIC_SITE_URL` environment variable support
+- Updated OG image to `og-image-infralens.png`
+- Production-ready configuration for Vercel deployment
+
+---
+
+## [0.2.0] - 2026-01-07
 
 ### Added
 
@@ -14,7 +172,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Open Graph meta tags for social media sharing
 - Twitter Card meta tags with large image support
 - Dedicated metadata configuration file (`src/lib/metadata.ts`)
-- OG image integration (`/logo-infralens-og.png`)
+- OG image integration (`/og-image-infralens.png`)
 
 ### Changed
 
@@ -159,4 +317,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[0.1.0]: https://github.com/yourusername/infralens/releases/tag/v0.1.0
+[Unreleased]: https://github.com/Randy-R-code/infralens/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.0.0
+[0.2.0]: https://github.com/Randy-R-code/infralens/releases/tag/v0.2.0
+[0.1.0]: https://github.com/Randy-R-code/infralens/releases/tag/v0.1.0

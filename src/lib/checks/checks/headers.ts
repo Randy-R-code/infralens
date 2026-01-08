@@ -1,3 +1,4 @@
+import { securityHeadersRecommendation } from "@/lib/recommendations/security";
 import { CheckRunner } from "../types";
 
 const REQUIRED_HEADERS = [
@@ -42,6 +43,7 @@ export const runHeadersCheck: CheckRunner<{
     return {
       id: "headers",
       label: "HTTP Security Headers",
+      category: "http-security",
       status,
       summary:
         missing.length === 0
@@ -51,12 +53,15 @@ export const runHeadersCheck: CheckRunner<{
         present,
         missing,
       },
+      recommendation:
+        missing.length > 0 ? securityHeadersRecommendation(missing) : undefined,
       durationMs: Math.round(performance.now() - start),
     };
   } catch {
     return {
       id: "headers",
       label: "HTTP Security Headers",
+      category: "http-security",
       status: "error",
       summary: "Unable to fetch headers.",
       durationMs: Math.round(performance.now() - start),

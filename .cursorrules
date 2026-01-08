@@ -13,17 +13,26 @@ You are an AI embedded in a project that uses:
 
 # InfraLens
 
-**InfraLens** is a developer-focused web inspection tool that allows you to analyze and understand the public infrastructure of any website. It provides detailed insights on DNS records, HTTP headers, TLS versions, SSL certificates, and other key site features. The app is designed to be simple, fast, and developer-friendly, presenting results in a structured, readable format.
+**InfraLens** is a lightweight web inspection tool designed to quickly analyze the infrastructure, security, and technical signals of a website. It performs 16 independent checks across 6 categories using server-side execution.
 
 ### Key Features
 
-- Inspect HTTP responses and headers
-- Check DNS records and configuration
-- Analyze TLS and SSL settings
-- Detect technologies used on the website
-- Display results with clear status indicators (OK / Warning / Error)
-- Designed for rapid developer analysis and troubleshooting
+- **16 comprehensive checks** across HTTP & Security, Network & DNS, Infrastructure, Website Structure, Metadata & Stack, and Performance
+- **Weighted scoring system** with category breakdowns and letter grades (A–E)
+- **Actionable recommendations** with step-by-step guidance for failed checks
+- **Export functionality** to download results as JSON
+- **Rate limiting** to protect services and prevent abuse
+- **Type-safe architecture** with full TypeScript coverage
+- **Modular design** for easy extension with additional checks
 
-InfraLens is primarily intended as a **personal or portfolio project**, but its modular architecture makes it easy to extend with additional checks in the future.
+### Architecture
+
+- Next.js 16 (App Router) with React Server Components
+- Server Actions for all check execution
+- Native Node.js DNS resolution with caching
+- Parallel check execution for optimal performance
+- In-memory rate limiting
+
+InfraLens is **open source** (MIT License) and designed as a portfolio project, but its modular architecture makes it easy to extend with additional checks.
 
 </project>

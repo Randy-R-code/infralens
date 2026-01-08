@@ -6,13 +6,38 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
-export function CTA() {
+export function CTA({ onAnalyze }: { onAnalyze?: (url: string) => void }) {
   const [url, setUrl] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement analysis
-    console.log("Analyzing:", url);
+    if (!url.trim()) return;
+
+    if (onAnalyze) {
+      onAnalyze(url);
+    } else {
+      // Fallback: scroll to hero
+      const heroSection = document.getElementById("hero");
+      if (heroSection) {
+        const heroInput = heroSection.querySelector(
+          'input[type="url"]'
+        ) as HTMLInputElement;
+        if (heroInput) {
+          heroInput.value = url;
+          heroInput.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+        heroSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+        setTimeout(() => {
+          const heroForm = heroSection.querySelector("form");
+          if (heroForm) {
+            heroForm.requestSubmit();
+          }
+        }, 300);
+      }
+    }
   };
 
   return (

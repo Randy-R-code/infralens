@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { CheckResult } from "@/lib/checks/types";
+import { ChecksResponse } from "@/lib/checks/types";
 import { Search } from "lucide-react";
 import { useState, useTransition } from "react";
 import { runInfraChecks } from "../../../app/actions/run-checks";
@@ -12,7 +12,7 @@ export function Hero({
   onResults,
   onAnalysisStart,
 }: {
-  onResults?: (results: CheckResult[]) => void;
+  onResults?: (results: ChecksResponse) => void;
   onAnalysisStart?: () => void;
 }) {
   const [url, setUrl] = useState("");
@@ -25,9 +25,11 @@ export function Hero({
     onAnalysisStart?.();
 
     startTransition(async () => {
+      const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
+      let urlObj: URL;
+
       try {
-        const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
-        const urlObj = new URL(normalizedUrl);
+        urlObj = new URL(normalizedUrl);
         const results = await runInfraChecks(urlObj.toString());
         onResults?.(results);
 
@@ -40,16 +42,33 @@ export function Hero({
         }, 100);
       } catch (error) {
         console.error("Error running checks:", error);
-        onResults?.([
-          {
-            id: "error",
-            label: "Error",
-            status: "error",
-            summary:
-              "Failed to analyze the URL. Please check the URL and try again.",
-            durationMs: 0,
+        // Create a minimal error response
+        try {
+          urlObj = new URL(normalizedUrl);
+        } catch {
+          urlObj = new URL("https://example.com");
+        }
+        onResults?.({
+          url: normalizedUrl,
+          hostname: urlObj.hostname,
+          checks: [
+            {
+              id: "error",
+              label: "Error",
+              category: "http-security",
+              status: "error",
+              summary:
+                "Failed to analyze the URL. Please check the URL and try again.",
+              durationMs: 0,
+            },
+          ],
+          totalDurationMs: 0,
+          score: {
+            score: 0,
+            grade: "E",
+            categories: [],
           },
-        ]);
+        });
       }
     });
   };

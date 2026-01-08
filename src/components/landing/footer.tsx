@@ -17,6 +17,14 @@ export function Footer() {
             >
               Documentation
             </Link>
+            <Link
+              href="https://github.com/Randy-R-code/infralens"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-zinc-300 transition-colors"
+            >
+              GitHub
+            </Link>
             <Badge variant="outline" className="border-zinc-800">
               Open Source
             </Badge>
