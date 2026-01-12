@@ -15,6 +15,7 @@ InfraLens does not aim to replace full security audits or performance tools. Ins
 - Security headers (CSP, HSTS, X-Frame-Options, etc.)
 - HTTPS enforcement and redirect behavior
 - TLS version and certificate details
+- security.txt file (RFC 9116)
 
 ### Network & DNS
 
@@ -36,6 +37,7 @@ InfraLens does not aim to replace full security audits or performance tools. Ins
 
 - HTML metadata
 - Open Graph and social tags
+- Accessibility hints (lang, headings, alt text, landmarks)
 
 ### Technology Stack
 
@@ -56,7 +58,7 @@ InfraLens does not aim to replace full security audits or performance tools. Ins
 ## Features
 
 - **Fast** - Server-side parallel execution with optimized DNS caching
-- **Comprehensive** - 16 independent checks across 6 categories
+- **Comprehensive** - 18 independent checks across 6 categories
 - **Readable** - Clear, structured results with status indicators (OK / Warning / Error)
 - **Transparent** - Detailed documentation explaining each check and its purpose
 - **Actionable** - Contextual recommendations with step-by-step guidance
@@ -210,6 +212,7 @@ infralens/
 │   │   │   └── checks/                     # Individual check implementations
 │   │   │       ├── headers.ts              # HTTP security headers
 │   │   │       ├── https.ts                # HTTPS & TLS verification
+│   │   │       ├── security-txt.ts         # security.txt (RFC 9116)
 │   │   │       ├── redirects.ts            # Redirect chain analysis
 │   │   │       ├── dns-records.ts          # DNS record resolution
 │   │   │       ├── dns-security.ts         # SPF, DKIM, DMARC, DNSSEC
@@ -218,12 +221,13 @@ infralens/
 │   │   │       ├── sitemap.ts              # Sitemap detection
 │   │   │       ├── links.ts                # Link extraction & validation
 │   │   │       ├── metadata.ts             # HTML metadata checks
+│   │   │       ├── accessibility.ts        # Accessibility hints
 │   │   │       ├── social.ts               # Open Graph & Twitter Cards
 │   │   │       ├── stack.ts                # Technology stack detection
 │   │   │       ├── server-headers.ts       # Server header analysis
 │   │   │       ├── waf.ts                  # WAF/CDN detection
-│   │   │       ├── performance.ts          # Response metrics
-│   │   │       └── uptime.ts                # Reachability check
+│   │   │       ├── performance.ts           # Response metrics
+│   │   │       └── uptime.ts               # Reachability check
 │   │   │
 │   │   ├── dns/
 │   │   │   ├── index.ts                    # DNS client exports

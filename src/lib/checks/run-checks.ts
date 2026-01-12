@@ -1,4 +1,5 @@
 import { calculateGlobalScore } from "./calculate-score";
+import { runAccessibilityCheck } from "./checks/accessibility";
 import { runDnsRecordsCheck } from "./checks/dns-records";
 import { runDnsSecurityCheck } from "./checks/dns-security";
 import { runHeadersCheck } from "./checks/headers";
@@ -9,6 +10,7 @@ import { runMetadataCheck } from "./checks/metadata";
 import { runPerformanceCheck } from "./checks/performance";
 import { runRedirectsCheck } from "./checks/redirects";
 import { runRobotsCheck } from "./checks/robots";
+import { runSecurityTxtCheck } from "./checks/security-txt";
 import { runServerHeadersCheck } from "./checks/server-headers";
 import { runSitemapCheck } from "./checks/sitemap";
 import { runSocialCheck } from "./checks/social";
@@ -20,6 +22,7 @@ import { CheckContext, CheckRunner, ChecksResponse } from "./types";
 const CHECKS: CheckRunner[] = [
   runHeadersCheck,
   runHttpsCheck,
+  runSecurityTxtCheck,
   runRedirectsCheck,
   runDnsRecordsCheck,
   runDnsSecurityCheck,
@@ -28,6 +31,7 @@ const CHECKS: CheckRunner[] = [
   runSitemapCheck,
   runLinksCheck,
   runMetadataCheck,
+  runAccessibilityCheck,
   runPerformanceCheck,
   runServerHeadersCheck,
   runSocialCheck,

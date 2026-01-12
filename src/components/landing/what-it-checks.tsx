@@ -11,8 +11,8 @@ const categories = [
   {
     icon: Shield,
     title: "HTTP & Security",
-    description: "Security headers, HTTPS, redirects",
-    count: 3,
+    description: "Security headers, HTTPS, redirects, security.txt",
+    count: 4,
   },
   {
     icon: Globe,
@@ -35,8 +35,8 @@ const categories = [
   {
     icon: Code,
     title: "Metadata & Stack",
-    description: "HTML metadata, social tags, tech stack",
-    count: 4,
+    description: "HTML metadata, social tags, tech stack, accessibility",
+    count: 5,
   },
   {
     icon: Zap,

@@ -46,7 +46,7 @@ export default function DocsPage() {
             <CardHeader>
               <CardTitle className="text-2xl">Overview</CardTitle>
               <CardDescription className="text-zinc-400">
-                InfraLens performs 16 independent checks across 6 categories to
+                InfraLens performs 18 independent checks across 6 categories to
                 analyze the technical exposure and configuration of a website.
                 Each check is modular, type-safe, and focuses on a specific
                 aspect of infrastructure, security, or configuration.
@@ -256,6 +256,31 @@ export default function DocsPage() {
                   chains improve security, performance, and SEO.
                 </p>
               </div>
+              <div>
+                <h3 className="font-semibold text-zinc-200 mb-2">
+                  security.txt
+                </h3>
+                <p className="text-sm text-zinc-400 mb-2">
+                  InfraLens checks for the presence of a security.txt file
+                  according to RFC 9116. This file provides security researchers
+                  with contact information and vulnerability disclosure
+                  policies. The check verifies:
+                </p>
+                <ul className="text-sm text-zinc-400 space-y-1 list-disc list-inside">
+                  <li>
+                    Presence at /.well-known/security.txt or /security.txt
+                  </li>
+                  <li>Required Contact field</li>
+                  <li>Required Expires field (must be present per RFC 9116)</li>
+                  <li>
+                    Other optional fields (Encryption, Acknowledgments, etc.)
+                  </li>
+                </ul>
+                <p className="text-sm text-zinc-400 mt-2">
+                  A properly configured security.txt helps security researchers
+                  report vulnerabilities responsibly.
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -372,6 +397,43 @@ export default function DocsPage() {
                   This check analyzes server headers to identify server
                   software, X-Powered-By exposure, and potential information
                   leakage.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-zinc-200 mb-2">
+                  Accessibility Hints
+                </h3>
+                <p className="text-sm text-zinc-400 mb-2">
+                  InfraLens performs basic accessibility checks to identify
+                  common issues that affect screen readers and assistive
+                  technologies:
+                </p>
+                <ul className="text-sm text-zinc-400 space-y-1 list-disc list-inside">
+                  <li>
+                    <strong>lang attribute:</strong> Presence on the HTML
+                    element
+                  </li>
+                  <li>
+                    <strong>h1 heading:</strong> Presence and count (should be
+                    exactly one)
+                  </li>
+                  <li>
+                    <strong>Image alt text:</strong> Missing alt attributes on
+                    images
+                  </li>
+                  <li>
+                    <strong>ARIA landmarks:</strong> Semantic HTML elements and
+                    ARIA roles (header, nav, main, footer)
+                  </li>
+                  <li>
+                    <strong>Skip links:</strong> Presence of skip navigation
+                    links
+                  </li>
+                </ul>
+                <p className="text-sm text-zinc-400 mt-2">
+                  These are basic checks and do not replace comprehensive
+                  accessibility audits, but they help identify common issues
+                  that impact users with disabilities.
                 </p>
               </div>
             </CardContent>
