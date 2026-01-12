@@ -1,3 +1,4 @@
+import { RegisterServiceWorker } from "@/components/pwa/register-sw";
 import { siteMetadata } from "@/lib/metadata";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <RegisterServiceWorker />
         {children}
       </body>
     </html>
