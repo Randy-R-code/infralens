@@ -63,6 +63,8 @@ InfraLens does not aim to replace full security audits or performance tools. Ins
 - **Transparent** - Detailed documentation explaining each check and its purpose
 - **Actionable** - Contextual recommendations with step-by-step guidance
 - **Exportable** - Download results as JSON for further analysis
+- **History** - Recent analyses stored locally for quick access (up to 10)
+- **Installable** - Progressive Web App (PWA) with offline support
 - **Modular** - Extensible architecture for adding new checks
 - **Type-Safe** - Full TypeScript coverage with strict type checking
 
@@ -125,6 +127,7 @@ Open http://localhost:3000 in your browser to see the app.
 5. Examine individual check results with detailed data
 6. Review actionable recommendations for failed checks
 7. Export results as JSON for further analysis or reporting
+8. Access recent analyses from the history section (stored locally)
 
 ---
 

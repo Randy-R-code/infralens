@@ -1,5 +1,6 @@
 "use client";
 
+import { HistorySection } from "@/components/history/history-section";
 import { CTA } from "@/components/landing/cta";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
@@ -7,17 +8,32 @@ import { HowResults } from "@/components/landing/how-results";
 import { WhatItChecks } from "@/components/landing/what-it-checks";
 import { WhyInfraLens } from "@/components/landing/why-infralens";
 import { ResultsSection } from "@/components/results/results-section";
+import { useAnalysisHistory } from "@/hooks/use-analysis-history";
 import { ChecksResponse } from "@/lib/checks/types";
+import { HistoryEntry } from "@/lib/history/types";
 import { useState } from "react";
 import { runInfraChecks } from "./actions/run-checks";
 
 export default function Home() {
   const [results, setResults] = useState<ChecksResponse | undefined>();
   const [isLoading, setIsLoading] = useState(false);
+  const { history, addEntry, removeEntry, clearHistory } = useAnalysisHistory();
 
   const handleResults = (newResults: ChecksResponse) => {
     setResults(newResults);
     setIsLoading(false);
+    addEntry(newResults);
+  };
+
+  const handleHistorySelect = (entry: HistoryEntry) => {
+    setResults(entry.results);
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById("results")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
   };
 
   const handleAnalysisStart = () => {
@@ -53,9 +69,10 @@ export default function Home() {
     try {
       const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
       const urlObj = new URL(normalizedUrl);
-      const results = await runInfraChecks(urlObj.toString());
-      setResults(results);
+      const newResults = await runInfraChecks(urlObj.toString());
+      setResults(newResults);
       setIsLoading(false);
+      addEntry(newResults);
 
       // Scroll to results after a short delay
       setTimeout(() => {
@@ -150,6 +167,12 @@ export default function Home() {
       )}
       {!hasResults && (
         <>
+          <HistorySection
+            history={history}
+            onSelect={handleHistorySelect}
+            onRemove={removeEntry}
+            onClear={clearHistory}
+          />
           <WhatItChecks />
           <HowResults />
           <WhyInfraLens />

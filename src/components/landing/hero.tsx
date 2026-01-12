@@ -8,15 +8,17 @@ import { Search } from "lucide-react";
 import { useState, useTransition } from "react";
 import { runInfraChecks } from "../../../app/actions/run-checks";
 
+type HeroProps = {
+  onResults?: (results: ChecksResponse) => void;
+  onAnalysisStart?: () => void;
+  isLoading?: boolean;
+};
+
 export function Hero({
   onResults,
   onAnalysisStart,
   isLoading: externalIsLoading,
-}: {
-  onResults?: (results: ChecksResponse) => void;
-  onAnalysisStart?: () => void;
-  isLoading?: boolean;
-}) {
+}: HeroProps) {
   const [url, setUrl] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -141,6 +143,8 @@ export function Hero({
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
                 <Input
+                  id="url-input"
+                  name="url"
                   placeholder="https://example.com"
                   type="url"
                   required

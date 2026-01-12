@@ -13,6 +13,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-01-12
+
+### Added
+
+#### Analysis History
+
+- Persistent analysis history stored in localStorage
+- "Recent analyses" section on landing page displaying up to 10 entries
+- Each entry shows hostname, grade, and relative timestamp
+- Click on entry to load saved results instantly (no re-fetch)
+- Individual entry deletion with X button (visible on hover)
+- "Clear all" button to remove entire history
+- FIFO behavior: oldest entries removed when exceeding 10 analyses
+- Re-analyzing same URL updates existing entry instead of creating duplicate
+
+#### New Checks
+
+- **Security.txt Check**: Detects presence of `/.well-known/security.txt` or `/security.txt`
+- **Accessibility Check**: Validates HTML accessibility (lang attribute, skip links, ARIA landmarks, alt text, form labels)
+
+#### PWA Enhancements
+
+- Service Worker for offline caching with network-first strategy for HTML
+- Stale-while-revalidate for Next.js assets (`/_next/`)
+- Cache-first for static assets (images, icons, fonts)
+- Screenshots for PWA install prompt
+- Keyboard shortcuts in manifest
+
+### Changed
+
+#### UI/UX Improvements
+
+- Responsive grid layout for history cards: 1 column (mobile), 2 columns (sm), 3 columns (lg)
+- Added `id` and `name` attributes to form inputs for better accessibility
+- Improved Service Worker cache invalidation (v2)
+
+### Technical
+
+- Added `nanoid` dependency for unique history entry IDs
+- Used `useSyncExternalStore` for hydration-safe localStorage synchronization
+- History validation on load to handle corrupted/invalid localStorage data
+
+---
+
 ## [1.0.1] - 2026-01-08
 
 ### Added
@@ -374,7 +418,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/Randy-R-code/infralens/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/Randy-R-code/infralens/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.1.0
+[1.0.1]: https://github.com/Randy-R-code/infralens/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.0.0
 [0.2.0]: https://github.com/Randy-R-code/infralens/releases/tag/v0.2.0
 [0.1.0]: https://github.com/Randy-R-code/infralens/releases/tag/v0.1.0
