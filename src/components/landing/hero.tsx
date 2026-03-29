@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { parseAnalysisError } from "@/lib/checks/parse-error";
 import { ChecksResponse } from "@/lib/checks/types";
 import { Search } from "lucide-react";
 import { useState, useTransition } from "react";
@@ -33,11 +34,9 @@ export function Hero({
 
     startTransition(async () => {
       const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
-      let urlObj: URL;
 
       try {
-        urlObj = new URL(normalizedUrl);
-        const results = await runInfraChecks(urlObj.toString());
+        const results = await runInfraChecks(new URL(normalizedUrl).toString());
         onResults?.(results);
 
         // Scroll to results after a short delay
@@ -48,68 +47,7 @@ export function Hero({
           });
         }, 100);
       } catch (error) {
-        console.error("Error running checks:", error);
-
-        // Improved error handling
-        let errorMessage =
-          "Failed to analyze the URL. Please check the URL and try again.";
-        let hostname = "unknown";
-
-        if (error instanceof Error) {
-          // Rate limit error
-          if (error.message.includes("Rate limit exceeded")) {
-            errorMessage = error.message;
-          }
-          // URL validation error
-          else if (
-            error.message.includes("Invalid URL") ||
-            error.name === "TypeError"
-          ) {
-            errorMessage =
-              "Invalid URL format. Please enter a valid URL (e.g., https://example.com)";
-          }
-          // Network/timeout error
-          else if (
-            error.message.includes("timeout") ||
-            error.message.includes("fetch")
-          ) {
-            errorMessage =
-              "Request timed out or network error. Please check your connection and try again.";
-          }
-          // Generic error with message
-          else if (error.message) {
-            errorMessage = error.message;
-          }
-        }
-
-        // Try to extract hostname
-        try {
-          urlObj = new URL(normalizedUrl);
-          hostname = urlObj.hostname;
-        } catch {
-          // Keep "unknown" if URL is invalid
-        }
-
-        onResults?.({
-          url: normalizedUrl,
-          hostname,
-          checks: [
-            {
-              id: "error",
-              label: "Analysis Error",
-              category: "http-security",
-              status: "error",
-              summary: errorMessage,
-              durationMs: 0,
-            },
-          ],
-          totalDurationMs: 0,
-          score: {
-            score: 0,
-            grade: "E",
-            categories: [],
-          },
-        });
+        onResults?.(parseAnalysisError(error, normalizedUrl));
       }
     });
   };

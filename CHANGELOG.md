@@ -13,6 +13,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-03-29
+
+### Added
+
+- **Dynamic OG image** — replaced static `og-image-infralens.png` with a `next/og`-powered `opengraph-image.tsx` using local Geist fonts; shows a live-styled analysis card with score badge and check results
+- **404 page** — `app/not-found.tsx` matching the dark zinc design system
+- **PROJECT.md** — comprehensive project reference (architecture, check catalogue, scoring system, design tokens, dev guide); replaces `.cursorrules` as the canonical project context file
+
+### Changed
+
+- **Dependency updates**:
+  - `next` 16.1.1 → 16.2.1
+  - `react` / `react-dom` 19.2.3 → 19.2.4
+  - `lucide-react` ^0.562.0 → ^1.7.0
+  - `eslint-config-next` 16.1.1 → 16.2.1
+  - `@types/node` ^20 → ^22
+  - `nanoid` ^5.1.6 → ^5.1.7
+  - `tailwind-merge` ^3.4.0 → ^3.5.0
+- **Lucide icon renames** (lucide-react 1.x removed deprecated aliases):
+  - `CheckCircle2` → `CircleCheckBig`
+  - `AlertTriangle` → `TriangleAlert`
+  - `XCircle` → `CircleX`
+  - `AlertCircle` → `CircleAlert`
+- **`manifest.json` cleanup** — removed duplicate `maskable` icon entries (same file used for both `any` and `maskable` without proper safe-zone padding)
+- **Architecture: server/client split** — `app/page.tsx` is now a proper server component; interactive state extracted to `src/components/home-client.tsx`; static landing sections (`WhatItChecks`, `HowResults`, `WhyInfraLens`, `Footer`) are rendered as RSC and passed as props, reducing the client bundle
+- **Error handling deduplication** — extracted duplicated catch logic (Hero + CTA) into `src/lib/checks/parse-error.ts`; both paths now use a single `parseAnalysisError()` function
+- **Removed DOM manipulation** — replaced fragile `document.getElementById` query in the CTA handler with proper React state management via the shared `HomeClient`
+
+### Removed
+
+- **Unused boilerplate assets** — deleted 5 unused Next.js default files: `file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `window.svg`
+
+---
+
 ## [1.1.0] - 2026-01-12
 
 ### Added
@@ -418,7 +452,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/Randy-R-code/infralens/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Randy-R-code/infralens/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/Randy-R-code/infralens/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.1.0
 [1.0.1]: https://github.com/Randy-R-code/infralens/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.0.0

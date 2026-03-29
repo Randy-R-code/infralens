@@ -17,20 +17,11 @@ export const siteMetadata: Metadata = {
     description:
       "Inspect, analyze and understand any website infrastructure. Built for developers.",
     type: "website",
-    images: [
-      {
-        url: "/og-image-infralens.png",
-        width: 1200,
-        height: 630,
-        alt: "InfraLens — Website inspection tool",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "InfraLens — Website inspection tool",
     description:
       "Inspect, analyze and understand any website infrastructure. Built for developers.",
-    images: ["/og-image-infralens.png"],
   },
 };

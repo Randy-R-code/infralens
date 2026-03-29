@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Recommendation } from "@/lib/checks/types";
 import { cn } from "@/lib/utils";
-import { AlertCircle, AlertTriangle, Info } from "lucide-react";
+import { CircleAlert, Info, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 
 const severityConfig = {
@@ -12,12 +12,12 @@ const severityConfig = {
     className: "text-blue-500 border-blue-500/20 bg-blue-500/10",
   },
   warning: {
-    icon: AlertTriangle,
+    icon: TriangleAlert,
     label: "Warning",
     className: "text-amber-500 border-amber-500/20 bg-amber-500/10",
   },
   critical: {
-    icon: AlertCircle,
+    icon: CircleAlert,
     label: "Critical",
     className: "text-red-500 border-red-500/20 bg-red-500/10",
   },

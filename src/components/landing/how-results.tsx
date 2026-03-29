@@ -5,25 +5,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AlertTriangle, CheckCircle2, Info, XCircle } from "lucide-react";
+import { CircleCheckBig, CircleX, Info, TriangleAlert } from "lucide-react";
 
 const statuses = [
   {
-    icon: CheckCircle2,
+    icon: CircleCheckBig,
     label: "OK",
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/20",
   },
   {
-    icon: AlertTriangle,
+    icon: TriangleAlert,
     label: "Warning",
     color: "text-amber-500",
     bg: "bg-amber-500/10",
     border: "border-amber-500/20",
   },
   {
-    icon: XCircle,
+    icon: CircleX,
     label: "Error",
     color: "text-red-500",
     bg: "bg-red-500/10",

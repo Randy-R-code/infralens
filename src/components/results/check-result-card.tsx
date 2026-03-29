@@ -2,21 +2,21 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckResult } from "@/lib/checks/types";
 import { cn } from "@/lib/utils";
-import { AlertTriangle, CheckCircle2, XCircle } from "lucide-react";
+import { CircleCheckBig, CircleX, TriangleAlert } from "lucide-react";
 
 const statusConfig = {
   ok: {
-    icon: CheckCircle2,
+    icon: CircleCheckBig,
     label: "OK",
     className: "text-emerald-500 border-emerald-500/20 bg-emerald-500/10",
   },
   warning: {
-    icon: AlertTriangle,
+    icon: TriangleAlert,
     label: "Warning",
     className: "text-amber-500 border-amber-500/20 bg-amber-500/10",
   },
   error: {
-    icon: XCircle,
+    icon: CircleX,
     label: "Error",
     className: "text-red-500 border-red-500/20 bg-red-500/10",
   },
