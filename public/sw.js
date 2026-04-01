@@ -1,5 +1,5 @@
 // InfraLens Service Worker
-const CACHE_VERSION = "v2";
+const CACHE_VERSION = "v3";
 const CACHE_NAME = `infralens-${CACHE_VERSION}`;
 
 // Assets to cache on install (only truly static assets)
@@ -7,6 +7,7 @@ const STATIC_ASSETS = [
   "/manifest.json",
   "/icon-192.png",
   "/icon-512.png",
+  "/apple-touch-icon.png",
   "/favicon.ico",
 ];
 
@@ -15,7 +16,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS);
-    })
+    }),
   );
   // Activate immediately - don't wait for old SW to finish
   self.skipWaiting();
@@ -28,11 +29,11 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         cacheNames
           .filter(
-            (name) => name.startsWith("infralens-") && name !== CACHE_NAME
+            (name) => name.startsWith("infralens-") && name !== CACHE_NAME,
           )
-          .map((name) => caches.delete(name))
+          .map((name) => caches.delete(name)),
       );
-    })
+    }),
   );
   // Take control of all pages immediately
   self.clients.claim();
@@ -71,7 +72,7 @@ self.addEventListener("fetch", (event) => {
         return caches.match(request).then((cached) => {
           return cached || caches.match("/");
         });
-      })
+      }),
     );
     return;
   }
@@ -90,7 +91,7 @@ self.addEventListener("fetch", (event) => {
           });
           return cached || fetchPromise;
         });
-      })
+      }),
     );
     return;
   }
@@ -114,7 +115,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         });
-      })
+      }),
     );
     return;
   }

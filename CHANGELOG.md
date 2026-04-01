@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.1] - 2026-04-01
 
 ### Added
 
-- TBD
+- **`apple-touch-icon.png`** — added iOS home screen icon to `public/` and to the service worker static asset cache
+
+### Fixed
+
+- **Samsung WebAPK icon shrinkage** — restored `"purpose": "any maskable"` on both icon entries in `manifest.json` (192×192 and 512×512); with `"any"` only, Samsung applies its own squircle + adaptive scaling on every WebAPK remint, causing the logo to shrink progressively. The combined value tells Samsung the icon already has a proper background, stopping the reprocessing loop. The splash screen is unaffected: Chrome uses the `any` purpose for splash screens.
+
+### Changed
+
+- **Service Worker cache** — bumped to `v3` to invalidate stale icon/manifest caches and ensure Samsung re-reads the updated manifest on next visit
 
 ---
 
@@ -452,7 +460,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/Randy-R-code/infralens/compare/v1.2.0...HEAD
+[1.2.1]: https://github.com/Randy-R-code/infralens/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/Randy-R-code/infralens/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.1.0
 [1.0.1]: https://github.com/Randy-R-code/infralens/releases/tag/v1.0.1
