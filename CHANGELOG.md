@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2026-04-06
+
+### Changed
+
+- **`manifest.json` orientation** — set `"orientation": "any"` to allow the PWA to be used in landscape mode on mobile devices
+- **Dependency updates**:
+  - `next` + `eslint-config-next` 16.2.1 → 16.2.2
+  - `tailwindcss` + `@tailwindcss/postcss` 4.1.18 → 4.2.2
+  - `@types/react` 19.2.7 → 19.2.14
+  - `@types/node` 22.19.15 → 22.19.17
+  - `eslint` 9.39.2 → 9.39.4
+
+---
+
 ## [1.2.1] - 2026-04-01
 
 ### Added
@@ -460,6 +474,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[1.2.2]: https://github.com/Randy-R-code/infralens/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/Randy-R-code/infralens/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/Randy-R-code/infralens/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Randy-R-code/infralens/releases/tag/v1.1.0
